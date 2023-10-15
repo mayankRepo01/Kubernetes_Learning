@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: config-pod
+  labels:
+    app: config-pod
+spec:
+  containers:
+  - name: busyboxcontainer
+    image: busybox:latest
+    command: ["/bin/echo","$(APPLICATION_UI) $(LOG_LEVEL)"]
+    env:
+    - name: APPLICATION_UI
+      valueFrom:
+        configMapKeyRef:
+          name: app-def
+          key: app.ui
+    - name: LOG_LEVEL
+      valueFrom:
+        configMapKeyRef:
+          name: app-log
+          key: log_level
+
+
+

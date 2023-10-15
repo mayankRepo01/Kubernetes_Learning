@@ -1,0 +1,26 @@
+apiVersion: v1
+
+kind: Pod
+
+metadata:
+  name: my-pod
+  labels:
+    app: my-pod 
+
+spec:
+  containers:
+    - name: nginx-container
+      image: busybox:latest
+      command: [ "/bin/sh", "-c", "--" ]
+      args: [ "while true; do sleep 30; done;" ]
+      env:
+        - name: test
+          value: "test1"
+      volumeMounts:
+      - name: my-volume
+        mountPath: /var/
+  volumes:
+  - hostPath:
+      path: /root/test/
+    name: my-volume
+    

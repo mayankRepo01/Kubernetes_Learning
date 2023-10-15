@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: helloworld
+spec:
+ completions: 10 # no of pods to be completed for job completion
+ parallelism: 5  # this will determine how many can run in parallel
+ ttlSecondsAfterFinished: 1 # this will remove the jobs after the sec mentioned
+ template:  
+   spec:
+     containers:
+     - name: busybox
+       image: busybox
+       command: ["echo", "Hello Mayank"]
+     restartPolicy: Never # this should be never or on-failure

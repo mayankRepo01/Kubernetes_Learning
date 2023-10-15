@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: config-pod-volume
+  labels:
+    app: config-pod
+spec:
+  containers:
+  - name: busyboxcontainer
+    image: busybox:latest
+    command: [ "/bin/sh", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]
+    volumeMounts:
+     - name: config-volume
+       mountPath: "/etc/config"
+  volumes: 
+  - name: config-volume
+    configMap: 
+      name: app-def
+
